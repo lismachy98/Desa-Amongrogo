@@ -404,11 +404,13 @@ footer {
     .main-layout {
         grid-template-columns: 1fr; 
         gap: 0;
+        padding: 0 20px;
     }
 
     .sidebar-column {
         /* Pindahkan sidebar ke bawah konten utama jika diperlukan */
         order: 2; 
+        margin-top: 20px:
     }
     
     .main-column {
@@ -458,3 +460,4 @@ footer {
     }
 
 }
+
