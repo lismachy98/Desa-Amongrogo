@@ -408,11 +408,11 @@ footer {
 
     .sidebar-column {
         /* Pindahkan sidebar ke bawah konten utama jika diperlukan */
-        order: 1; 
+        order: 2; 
     }
     
     .main-column {
-        order: 2;
+        order: 1;
     }
 
     /* Navigasi Desktop disembunyikan */
@@ -456,4 +456,5 @@ footer {
         width: 100%;
         height: auto;
     }
+
 }
