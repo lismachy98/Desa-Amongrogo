@@ -4,217 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Struktur Organisasi Desa Amongrogo</title>
-  <link rel="stylesheet" href="web desa.css">
+    <link rel="stylesheet" href="web desa.css"> 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f9f9f9;
-      margin: 0;
-      padding: 0;
-    }
-
-    /* ====== HEADER (tetap) ====== */
-    header {
-      background-color: #fff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    header .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 10px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logo img {
-      height: 45px;
-      width: auto;
-    }
-
-    .logo h1 {
-      font-size: 20px;
-      font-weight: 700;
-      color: #1a6f8b;
-      margin: 0;
-    }
-
-    nav ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      gap: 25px;
-    }
-
-    nav ul li {
-      position: relative;
-    }
-
-    nav ul li a {
-      text-decoration: none;
-      font-weight: 500;
-      color: #333;
-      transition: color 0.2s;
-    }
-
-    nav ul li a:hover {
-      color: #1a6f8b;
-    }
-
-    .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: #fff;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      border-radius: 5px;
-      padding: 10px 0;
-      z-index: 10;
-    }
-
-    .dropdown:hover .dropdown-menu {
-      display: block;
-    }
-
-    .dropdown-menu li {
-      padding: 5px 20px;
-    }
-
-    .dropdown-menu li a {
-      color: #333;
-      font-size: 14px;
-    }
-
-    .dropdown-menu li a:hover {
-      color: #1a6f8b;
-    }
-
-    /* ====== BAGIAN JUDUL (tetap) ====== */
-    h2 {
-      color: #1a6f8b;
-      text-align: center;
-      font-weight: 700;
-      text-transform: uppercase;
-      margin: 60px 0 20px;
-    }
-
-    p {
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto 40px;
-      color: #555;
-      font-size: 15px;
-    }
-
-    /* ====== STRUKTUR ORGANISASI (Revisi Layout Dasar) ====== */
-    main {
-      text-align: center;
-      margin-top: 30px;
-    }
-
-    .org-chart {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      max-width: 1200px; /* Lebarkan agar Level 3 dan 4 muat */
-      margin: 0 auto 60px;
-    }
-
-    .level {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 20px; /* Kurangi gap agar muat banyak node */
-      margin: 50px 0;
-      flex-wrap: wrap;
-      position: relative;
-      padding: 0 10px;
-    }
-
-    .node {
-      background: #fff;
-      border: 2px solid #1a6f8b;
-      border-radius: 10px;
-      padding: 10px 15px; /* Kurangi padding */
-      width: 140px; /* Kurangi lebar node */
-      height: 65px; /* Atur tinggi */
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    .node h3 {
-      font-size: 13px; /* Kurangi ukuran font */
-      color: #1a6f8b;
-      font-weight: 700;
-      margin-bottom: 3px;
-    }
-
-    .node p {
-      margin: 0;
-      font-size: 11px; /* Kurangi ukuran font */
-      color: #333;
-      font-weight: 500;
-      max-width: none;
-    }
-
-    canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    footer {
-      text-align: center;
-      padding: 20px 0;
-      background: #f8f9fa;
-      color: #555;
-      font-size: 14px;
-    }
-
-    @media (max-width: 1200px) {
-      .level { gap: 10px; }
-      .node { width: 130px; }
-    }
-
-    @media (max-width: 992px) {
-      .level { justify-content: center; }
-    }
-
-    @media (max-width: 768px) {
-      .level { flex-direction: column; gap: 20px; margin: 30px 0; }
-      .node { width: 85%; }
-    }
+    /* CSS dari respons sebelumnya yang sudah dipindahkan ke web desa.css seharusnya sudah memadai */
   </style>
 </head>
 
 <body>
 
 <header id="main-header">
-  <div class="container nav-content">
+    <div class="container nav-content">
     <div class="logo">
       <img src="assets/logo pemerintahan kabupaten batang.png" alt="logo">
       <h1>Desa Amongrogo</h1>
@@ -255,7 +56,7 @@
         <h3>AKHMAD KHAERUDIN, S.Pd.I</h3>
         <p>Sekretaris Desa</p>
       </div>
-          </div>
+    </div>
 
         <div class="level" id="level3">
       <div class="node" id="kasi-pemerintahan"><h3>MUKHYI</h3><p>Kasi Pemerintahan</p></div>
@@ -272,131 +73,141 @@
       <div class="node" id="kadus-manggisan"><h3>PRI HARSOYO</h3><p>Kadus Manggisan</p></div>
       <div class="node" id="kadus-sindutan"><h3>SU’UT, S.Ag.</h3><p>Kadus Sindutan</p></div>
       <div class="node" id="kadus-sokosawit"><h3>A. NAFIS, SE</h3><p>Kadus Sokosawit</p></div>
-      <div class="node" id="kadus-maliyani"><h3>RUSLINAWATI</h3><p>Kadus Maliyani</p></div>
+      <div class="node" id="kadus-maliyani"><h3>RUSLINAWATI</h3><p>Kadus Maliyan</p></div>
       <div class="node" id="kadus-kwangsan"><h3>SETYO EDI WIBOWO</h3><p>Kadus Kwangsan</p></div>
     </div>
   </div>
 </main>
 
 <script>
-function drawConnections() {
-  const canvas = document.getElementById('connector');
-  const orgChart = document.getElementById('orgChart');
-  const ctx = canvas.getContext('2d');
-  const rect = orgChart.getBoundingClientRect();
-
-  canvas.width = rect.width;
-  canvas.height = rect.height;
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.strokeStyle = '#1a6f8b';
-  ctx.lineWidth = 2;
-
-  // Fungsi pembantu untuk mendapatkan posisi pusat node
-  const getCenter = (el) => {
-    const r = el.getBoundingClientRect();
-    return {
-      x: r.left + r.width / 2 - rect.left,
-      top: r.top - rect.top,
-      bottom: r.bottom - rect.top,
-      left: r.left - rect.left,
-      right: r.right - rect.left
-    };
-  };
-
-  const kepala = document.getElementById('kepala');
-  const sekdes = document.getElementById('sekdes');
-  const level3 = Array.from(document.querySelectorAll('#level3 .node'));
-  const level4 = Array.from(document.querySelectorAll('#level4 .node'));
-
-  // Dapatkan posisi pusat
-  const cKepala = getCenter(kepala);
-  const cSekdes = getCenter(sekdes);
-
-  // 1. Kepala (Level 1) → Sekdes (Level 2)
-  ctx.beginPath();
-  ctx.moveTo(cKepala.x, cKepala.bottom);
-  ctx.lineTo(cSekdes.x, cSekdes.top);
-  ctx.stroke();
-
-  // 2. Sekdes (Level 2) → Kasi & Kaur (Level 3)
-  if (level3.length > 0) {
-    const cLevel3 = level3.map(getCenter);
-    const firstL3 = cLevel3[0];
-    const lastL3 = cLevel3[cLevel3.length - 1];
-    const horizontalL3Y = firstL3.top - 30; // Garis horizontal Level 3
-    const middleL3X = cSekdes.x; // Titik tengah komando vertikal
-
-    // Garis Vertikal Sekdes ke Garis Horizontal Level 3
-    ctx.beginPath();
-    ctx.moveTo(middleL3X, cSekdes.bottom);
-    ctx.lineTo(middleL3X, horizontalL3Y);
-    ctx.stroke();
-
-    // Garis Horizontal Level 3
-    ctx.beginPath();
-    ctx.moveTo(firstL3.x, horizontalL3Y);
-    ctx.lineTo(lastL3.x, horizontalL3Y);
-    ctx.stroke();
-
-    // Garis Vertikal dari Garis Horizontal ke setiap Node Level 3
-    cLevel3.forEach(cNode => {
-      ctx.beginPath();
-      ctx.moveTo(cNode.x, horizontalL3Y);
-      ctx.lineTo(cNode.x, cNode.top);
-      ctx.stroke();
-    });
-  }
-
-  // 3. Level 3 → Kadus (Level 4)
-  if (level4.length > 0) {
-    const cLevel4 = level4.map(getCenter);
-    const firstL4 = cLevel4[0];
-    const lastL4 = cLevel4[cLevel4.length - 1];
-    const horizontalL4Y = firstL4.top - 30; // Garis horizontal Level 4
-    const middleL3X = cSekdes.x; // Titik komando Level 3
-
-    // Garis Vertikal dari Level 3 ke Garis Horizontal Level 4 (dari titik Sekdes)
-    // Menarik garis ke bawah dari titik komando Level 3
-    const L3BottomY = level3[0].getBoundingClientRect().bottom - rect.top;
-    ctx.beginPath();
-    ctx.moveTo(middleL3X, L3BottomY + 15);
-    ctx.lineTo(middleL3X, horizontalL4Y);
-    ctx.stroke();
+// Fungsi yang sekarang berjalan setelah DOM dipastikan dimuat
+document.addEventListener('DOMContentLoaded', function() {
     
-    // Menghubungkan garis vertikal komando ke garis horizontal Kadus
-    ctx.beginPath();
-    ctx.moveTo(middleL3X, horizontalL4Y);
-    ctx.lineTo(firstL4.x, horizontalL4Y); // Dari tengah komando ke Kadus paling kiri
-    ctx.lineTo(lastL4.x, horizontalL4Y); // Dari Kadus paling kiri ke Kadus paling kanan
-    ctx.stroke();
+    function drawConnections() {
+        const canvas = document.getElementById('connector');
+        const orgChart = document.getElementById('orgChart');
+        
+        // Jika elemen tidak ditemukan, hentikan fungsi
+        if (!canvas || !orgChart) return;
 
-    // Garis Horizontal Level 4 (memastikan semua kadus terhubung)
-    ctx.beginPath();
-    ctx.moveTo(firstL4.x, horizontalL4Y);
-    ctx.lineTo(lastL4.x, horizontalL4Y);
-    ctx.stroke();
+        const ctx = canvas.getContext('2d');
+        const rect = orgChart.getBoundingClientRect();
 
-    // Garis Vertikal dari Garis Horizontal ke setiap Node Level 4 (Kadus)
-    cLevel4.forEach(cNode => {
-      ctx.beginPath();
-      ctx.moveTo(cNode.x, horizontalL4Y);
-      ctx.lineTo(cNode.x, cNode.top);
-      ctx.stroke();
-    });
-  }
+        // Mengatur ukuran canvas agar sama dengan container org-chart
+        canvas.style.width = rect.width + 'px';
+        canvas.style.height = rect.height + 'px';
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+        
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = '#1a6f8b';
+        ctx.lineWidth = 2;
 
-}
+        // Fungsi pembantu untuk mendapatkan posisi pusat node relatif terhadap orgChart
+        const getCenter = (el) => {
+            const r = el.getBoundingClientRect();
+            // Posisi relatif terhadap orgChart container
+            return {
+                x: r.left + r.width / 2 - rect.left,
+                top: r.top - rect.top,
+                bottom: r.bottom - rect.top
+            };
+        };
 
-// Panggil fungsi ketika halaman dimuat dan ukuran jendela diubah
-window.addEventListener('load', drawConnections);
-window.addEventListener('resize', drawConnections);
+        const kepala = document.getElementById('kepala');
+        const sekdes = document.getElementById('sekdes');
+        const level3 = Array.from(document.querySelectorAll('#level3 .node'));
+        const level4 = Array.from(document.querySelectorAll('#level4 .node'));
+
+        // Pastikan node kunci ada sebelum melanjutkan
+        if (!kepala || !sekdes || level3.length === 0 || level4.length === 0) return;
+
+        const cKepala = getCenter(kepala);
+        const cSekdes = getCenter(sekdes);
+
+        // 1. Kepala (Level 1) → Sekdes (Level 2)
+        ctx.beginPath();
+        ctx.moveTo(cKepala.x, cKepala.bottom);
+        ctx.lineTo(cSekdes.x, cSekdes.top);
+        ctx.stroke();
+
+        
+        // 2. Sekdes (Level 2) → Kasi & Kaur (Level 3)
+        const cLevel3 = level3.map(getCenter);
+        const firstL3 = cLevel3[0];
+        const lastL3 = cLevel3[cLevel3.length - 1];
+        const horizontalL3Y = firstL3.top - 30; // Garis horizontal Level 3
+        const middleL3X = cSekdes.x; // Titik tengah komando vertikal
+
+        // Garis Vertikal Sekdes ke Garis Horizontal Level 3
+        ctx.beginPath();
+        ctx.moveTo(middleL3X, cSekdes.bottom);
+        ctx.lineTo(middleL3X, horizontalL3Y);
+        ctx.stroke();
+
+        // Garis Horizontal Level 3 (Menghubungkan semua Kasi/Kaur)
+        ctx.beginPath();
+        ctx.moveTo(firstL3.x, horizontalL3Y);
+        ctx.lineTo(lastL3.x, horizontalL3Y);
+        ctx.stroke();
+
+        // Garis Vertikal dari Garis Horizontal ke setiap Node Level 3
+        cLevel3.forEach(cNode => {
+            ctx.beginPath();
+            ctx.moveTo(cNode.x, horizontalL3Y);
+            ctx.lineTo(cNode.x, cNode.top);
+            ctx.stroke();
+        });
+
+        
+        // 3. Level 3 → Kadus (Level 4)
+        const cLevel4 = level4.map(getCenter);
+        const firstL4 = cLevel4[0];
+        const lastL4 = cLevel4[cLevel4.length - 1];
+        const horizontalL4Y = firstL4.top - 30; // Garis horizontal Level 4
+        
+        // Titik komando vertikal dari Level 3 ke Level 4
+        const L3BottomY = level3[0].getBoundingClientRect().bottom - rect.top;
+        const commonL3X = middleL3X; // Tetap gunakan pusat Sekdes/pusat Level 3 sebagai titik komando
+
+        // Garis Vertikal dari bawah Level 3 ke Garis Horizontal Level 4
+        ctx.beginPath();
+        ctx.moveTo(commonL3X, L3BottomY + 15);
+        ctx.lineTo(commonL3X, horizontalL4Y);
+        ctx.stroke();
+        
+        // Garis Horizontal Level 4 (Menghubungkan semua Kadus, termasuk Sindutan ke Kwangsan)
+        ctx.beginPath();
+        ctx.moveTo(firstL4.x, horizontalL4Y);
+        ctx.lineTo(lastL4.x, horizontalL4Y);
+        // Sambungkan garis tengah komando ke garis horizontal ini (jika tidak sudah terhubung)
+        if (commonL3X < firstL4.x || commonL3X > lastL4.x) {
+          ctx.moveTo(commonL3X, horizontalL4Y);
+          ctx.lineTo(commonL3X < firstL4.x ? firstL4.x : lastL4.x, horizontalL4Y);
+        }
+        ctx.stroke();
+
+        // Garis Vertikal dari Garis Horizontal ke setiap Node Level 4 (Kadus)
+        cLevel4.forEach(cNode => {
+            ctx.beginPath();
+            ctx.moveTo(cNode.x, horizontalL4Y);
+            ctx.lineTo(cNode.x, cNode.top);
+            ctx.stroke();
+        });
+    }
+
+    // Jalankan fungsi saat DOM dimuat
+    drawConnections(); 
+    
+    // Jalankan lagi saat jendela diubah ukurannya
+    window.addEventListener('resize', drawConnections);
+});
 </script>
 
 <footer class="text-center" style="padding:20px 0; background:#f8f9fa; margin-top:40px;">
   <p>&copy; 2025 Pemerintah Desa Amongrogo</p>
 </footer>
   
-<script src="script.js"></script>
 </body>
 
 </html>
