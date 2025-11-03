@@ -1,62 +1,400 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Struktur Organisasi Desa Amongrogo</title>
-    <link rel="stylesheet" href="web desa.css"> 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Struktur Organisasi Desa Amongrogo</title>
+  <link rel="stylesheet" href="web desa.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* ====== HEADER ====== */
+    header {
+      background-color: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    header .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo img {
+      height: 45px;
+      width: auto;
+    }
+
+    .logo h1 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a6f8b;
+      margin: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    nav ul li {
+      position: relative;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #333;
+      transition: color 0.2s;
+    }
+
+    nav ul li a:hover {
+      color: #1a6f8b;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 5px;
+      padding: 10px 0;
+      z-index: 10;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-menu li {
+      padding: 5px 20px;
+    }
+
+    .dropdown-menu li a {
+      color: #333;
+      font-size: 14px;
+    }
+
+    .dropdown-menu li a:hover {
+      color: #1a6f8b;
+    }
+
+    /* ====== BAGIAN JUDUL ====== */
+    h2 {
+      color: #1a6f8b;
+      text-align: center;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin: 60px 0 20px;
+    }
+
+    p {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 40px;
+      color: #555;
+      font-size: 15px;
+    }
+
+    /* ====== STRUKTUR ORGANISASI ====== */
+    .box {
+      display: flex;
+      flex-direction: column;
+      justify-content: center; /* Tengah vertikal */
+      align-items: center;      /* Tengah horizontal */
+      text-align: center;       /* Biar teksnya juga rata tengah */
+      width: 180px;
+      height: 80px;
+      background-color: #f8f9fa;
+      border: 2px solid #333;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      font-weight: 600;
+      margin: 10px;
+    }
+
+    main {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .org-chart {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto 60px;
+    }
+
+    .level {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 40px;
+      margin: 50px 0;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .node {
+      background: #fff;
+      border: 2px solid #1a6f8b;
+      border-radius: 10px;
+      padding: 15px 20px;
+      width: 180px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      z-index: 2;
+    }
+
+    .node h3 {
+      font-size: 14px;
+      color: #1a6f8b;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .node p {
+      margin: 0;
+      font-size: 12px;
+      color: #333;
+      font-weight: 500;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px 0;
+      background: #f8f9fa;
+      color: #555;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .level { flex-direction: column; gap: 25px; }
+      .node { width: 85%; }
+    }
+  </style>
 </head>
 
 <body>
 
 <header id="main-header">
-  </header>
+  <div class="container nav-content">
+    <div class="logo">
+      <img src="assets/logo pemerintahan kabupaten batang.png" alt="logo">
+      <h1>Desa Amongrogo</h1>
+    </div>
+    <nav class="main-nav">
+      <ul>
+        <li><a href="index.html">Beranda</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle">Profil Desa <i class="fas fa-caret-down"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="perangkat desa.html"><i class="fas fa-users"></i> Perangkat Desa</a></li>
+            <li><a href="sejarah desa.html"><i class="fas fa-book-open"></i> Sejarah Desa</a></li>
+            <li><a href="visi misi desa.html"><i class="fas fa-bullseye"></i> Visi & Misi Desa</a></li>
+          </ul>
+        </li>
+        <li><a href="diagram rekapitulasi warga.html">Data Statistik</a></li>
+        <li><a href="#">Kontak</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
 <main>
-  <h2>Struktur Organisasi Pemerintah Desa Amongrogo</h2>
+  <h2>Struktur Organisasi Pemerintah Desa Amongrogo</h2>
 
-    <div class="org-chart" id="orgChart">
+  <div class="org-chart" id="orgChart">
+    <canvas id="connector"></canvas>
 
-        <div class="level" id="level1">
-      <div class="node" id="kepala">
-        <h3>SETYO PRANOTO</h3>
-        <p>Kepala Desa</p>
-      </div>
-    </div>
+    <!-- Level 1 -->
+    <div class="level" id="level1">
+      <div class="node" id="kepala">
+        <h3>SETYO PRANOTO</h3>
+        <p>Kepala Desa</p>
+      </div>
+    </div>
 
-        <div class="level" id="level2">
-      <div class="node" id="sekdes">
-        <h3>AKHMAD KHAERUDIN, S.Pd.I</h3>
-        <p>Sekretaris Desa</p>
-      </div>
-    </div>
+    <!-- Level 2 -->
+    <div class="level" id="level2">
+      <div class="node" id="sekdes">
+        <h3>AKHMAD KHAERUDIN, S.Pd.I</h3>
+        <p>Sekretaris Desa</p>
+      </div>
+    </div>
 
-        <div class="level" id="level3">
-      <div class="node" id="kasi-pemerintahan"><h3>MUKHYI</h3><p>Kasi Pemerintahan</p></div>
-      <div class="node" id="kasi-kesejahteraan"><h3>JARWANTO ES</h3><p>Kasi Kesejahteraan</p></div>
-      <div class="node" id="kasi-pelayanan"><h3>ROHMAT</h3><p>Kasi Pelayanan</p></div>
-      <div class="node" id="kaur-tu"><h3>SETYO BUDIYANTO</h3><p>Kaur TU & Umum</p></div>
-      <div class="node" id="kaur-keuangan"><h3>YANARIYA, S.Pd.</h3><p>Kaur Keuangan</p></div>
-      <div class="node" id="kaur-perencanaan"><h3>GUNTOYO</h3><p>Kaur Perencanaan</p></div>
-    </div>
+    <!-- Level 3 -->
+    <div class="level" id="level3">
+      <div class="node"><h3>MUKHYI</h3><p>Kasi Pemerintahan</p></div>
+      <div class="node"><h3>JARWANTO ES</h3><p>Kasi Kesejahteraan</p></div>
+      <div class="node"><h3>ROHMAT</h3><p>Kasi Pelayanan</p></div>
+      <div class="node"><h3>SETYO BUDIYANTO</h3><p>Kaur TU & Umum</p></div>
+      <div class="node"><h3>YANARIYA, S.Pd.</h3><p>Kaur Keuangan</p></div>
+      <div class="node"><h3>GUNTOYO</h3><p>Kaur Perencanaan</p></div>
+    </div>
 
-        <div class="level" id="level4">
-      <div class="node" id="kadus-padenokan"><h3>RUSLINAWATI</h3><p>Kadus Padenokan</p></div>
-      <div class="node" id="kadus-amongrogo"><h3>MURYANTO</h3><p>Kadus Amongrogo</p></div>
-      <div class="node" id="kadus-manggisan"><h3>PRI HARSOYO</h3><p>Kadus Manggisan</p></div>
-      <div class="node" id="kadus-sindutan"><h3>SU’UT, S.Ag.</h3><p>Kadus Sindutan</p></div>
-      <div class="node" id="kadus-sokosawit"><h3>A. NAFIS, SE</h3><p>Kadus Sokosawit</p></div>
-      <div class="node" id="kadus-maliyani"><h3>RUSLINAWATI</h3><p>Kadus Maliyani</p></div>
-      <div class="node" id="kadus-kwangsan"><h3>SETYO EDI WIBOWO</h3><p>Kadus Kwangsan</p></div>
-    </div>
-  </div>
+    <!-- Level 4 -->
+    <div class="level" id="level4">
+      <div class="node"><h3>RUSLINAWATI</h3><p>Kadus Padenokan</p></div>
+      <div class="node"><h3>MURYANTO</h3><p>Kadus Amongrogo</p></div>
+      <div class="node"><h3>PRI HARSOYO</h3><p>Kadus Manggisan</p></div>
+      <div class="node"><h3>SU’UT, S.Ag.</h3><p>Kadus Sindutan</p></div>
+      <div class="node"><h3>A. NAFIS, SE</h3><p>Kadus Sokosawit</p></div>
+      <div class="node"><h3>RUSLINAWATI</h3><p>Kadus Maliyani</p></div>
+      <div class="node"><h3>SETYO EDI WIBOWO</h3><p>Kadus Kwangsan</p></div>
+    </div>
+  </div>
 </main>
 
-<footer class="text-center" style="padding:20px 0; background:#f8f9fa; margin-top:40px;">
-  <p>&copy; 2025 Pemerintah Desa Amongrogo</p>
+<script>
+function drawConnections() {
+  const canvas = document.getElementById('connector');
+  const orgChart = document.getElementById('orgChart');
+  const ctx = canvas.getContext('2d');
+  const rect = orgChart.getBoundingClientRect();
+
+  canvas.width = rect.width;
+  canvas.height = rect.height;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.strokeStyle = '#1a6f8b';
+  ctx.lineWidth = 2;
+
+  const getCenter = (el) => {
+    const r = el.getBoundingClientRect();
+    return {
+      x: r.left + r.width / 2 - rect.left,
+      top: r.top - rect.top,
+      bottom: r.bottom - rect.top
+    };
+  };
+
+  const kepala = document.getElementById('kepala');
+  const sekdes = document.getElementById('sekdes');
+  const level3 = document.querySelectorAll('#level3 .node');
+  const level4 = document.querySelectorAll('#level4 .node');
+
+  const cKepala = getCenter(kepala);
+  const cSekdes = getCenter(sekdes);
+
+  // Kepala → Sekdes
+  ctx.beginPath();
+  ctx.moveTo(cKepala.x, cKepala.bottom);
+  ctx.lineTo(cSekdes.x, cSekdes.top);
+  ctx.stroke();
+
+  // Sekdes → Level 3
+  const firstL3 = getCenter(level3[0]);
+  const lastL3 = getCenter(level3[level3.length - 1]);
+
+  ctx.beginPath();
+  ctx.moveTo(cSekdes.x, cSekdes.bottom);
+  ctx.lineTo(cSekdes.x, firstL3.top - 40);
+  ctx.lineTo((firstL3.x + lastL3.x) / 2, firstL3.top - 40);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(firstL3.x, firstL3.top - 40);
+  ctx.lineTo(lastL3.x, firstL3.top - 40);
+  ctx.stroke();
+
+  level3.forEach(node => {
+    const cNode = getCenter(node);
+    ctx.beginPath();
+    ctx.moveTo(cNode.x, firstL3.top - 40);
+    ctx.lineTo(cNode.x, cNode.top);
+    ctx.stroke();
+  });
+
+  // Level 3 → Level 4
+  const firstL4 = getCenter(level4[0]);
+  const lastL4 = getCenter(level4[level4.length - 1]);
+
+  ctx.beginPath();
+  ctx.moveTo((firstL3.x + lastL3.x) / 2, level3[0].getBoundingClientRect().bottom - rect.top + 20);
+  ctx.lineTo((firstL3.x + lastL3.x) / 2, firstL4.top - 40);
+  ctx.lineTo((firstL4.x + lastL4.x) / 2, firstL4.top - 40);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(firstL4.x, firstL4.top - 40);
+  ctx.lineTo(lastL4.x, firstL4.top - 40);
+  ctx.stroke();
+
+  level4.forEach(node => {
+    const cNode = getCenter(node);
+    ctx.beginPath();
+    ctx.moveTo(cNode.x, firstL4.top - 40);
+    ctx.lineTo(cNode.x, cNode.top);
+    ctx.stroke();
+  });
+
+    // === Tambahan: Sekdes langsung ke Level 4 ===
+  const middleL4 = (firstL4.x + lastL4.x) / 2;
+
+  ctx.beginPath();
+  ctx.moveTo(cSekdes.x, cSekdes.bottom);
+  ctx.lineTo(cSekdes.x, firstL4.top - 40);
+  ctx.lineTo(middleL4, firstL4.top - 40);
+  ctx.stroke();
+
+  // === Tambahan: perpanjang garis horizontal Level 4 biar nyambung penuh ===
+  const leftMost = Math.min(firstL4.x, cSekdes.x);
+  const rightMost = Math.max(lastL4.x, cSekdes.x);
+  ctx.beginPath();
+  ctx.moveTo(leftMost, firstL4.top - 40);
+  ctx.lineTo(rightMost, firstL4.top - 40);
+  ctx.stroke();
+}
+
+window.addEventListener('load', drawConnections);
+window.addEventListener('resize', drawConnections);
+</script>
+
+  <footer class="text-center" style="padding:20px 0; background:#f8f9fa; margin-top:40px;">
+  <p>&copy; 2025 Pemerintah Desa Amongrogo</p>
 </footer>
-  
+  
+<script src="script.js"></script>
 </body>
+
 </html>
+
+
+
+
+
