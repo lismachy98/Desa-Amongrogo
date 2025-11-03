@@ -461,72 +461,203 @@ footer {
 
 }
 
-/* ======================= 5. STRUKTUR ORGANISASI (KHUSUS) ======================= */
+/* ======================= 5. STRUKTUR ORGANISASI (SOLUSI CSS MURNI) ======================= */
 .org-chart {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 1200px; /* Lebarkan agar Level 3 dan 4 muat */
-    margin: 0 auto 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto 60px;
+    position: relative;
 }
 
-.level {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 20px; /* Kurangi gap agar muat banyak node */
-    margin: 50px 0;
-    flex-wrap: wrap;
-    position: relative;
-    padding: 0 10px;
-}
-
+/* Base Node Styling */
 .node {
-    background: var(--color-light); /* Menggunakan variabel light */
-    border: 2px solid var(--color-primary); /* Menggunakan variabel primary */
-    border-radius: 10px;
-    padding: 10px 15px; /* Kurangi padding */
-    width: 140px; /* Kurangi lebar node */
-    height: 65px; /* Atur tinggi */
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    background: var(--color-light);
+    border: 2px solid var(--color-primary);
+    border-radius: 10px;
+    padding: 10px 15px;
+    width: 150px;
+    height: 70px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 10; /* Pastikan di atas garis */
+    position: relative;
+    margin: 20px 0; /* Jarak vertikal antar level */
 }
 
 .node h3 {
-    font-size: 13px; /* Kurangi ukuran font */
-    color: var(--color-primary);
-    font-weight: 700;
-    margin-bottom: 3px;
+    font-size: 13px;
+    color: var(--color-primary);
+    font-weight: 700;
+    margin: 0;
 }
 
 .node p {
-    margin: 0;
-    font-size: 11px; /* Kurangi ukuran font */
-    color: var(--color-text);
-    font-weight: 500;
-    max-width: none;
+    font-size: 11px;
+    color: var(--color-text);
+    font-weight: 500;
+    margin: 0;
 }
 
-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 1;
+/* Kontainer Level */
+.level {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    margin: 0;
 }
 
-@media (max-width: 1200px) {
-    .level { gap: 10px; }
-    .node { width: 130px; }
+/* Level 1: Kepala Desa */
+#level1 {
+    margin-bottom: 20px;
+}
+#kepala:after { /* Garis vertikal Kepala Desa ke Sekdes */
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 2px;
+    height: 30px; /* Jarak sebelum Sekdes */
+    background: var(--color-primary);
 }
 
+
+/* Level 2: Sekretaris Desa */
+#sekdes {
+    /* Sekdes adalah titik pusat komando */
+    margin-bottom: 20px;
+}
+#sekdes:after { /* Garis vertikal dari Sekdes ke garis horizontal Kasi/Kaur */
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 2px;
+    height: 30px; /* Jarak sebelum garis horizontal */
+    background: var(--color-primary);
+}
+
+
+/* Level 3: Kasi & Kaur */
+#level3 {
+    margin-top: 50px; /* Jarak dari Sekdes (sudah termasuk after Sekdes) */
+    gap: 20px;
+    flex-wrap: wrap; /* Biar responsif */
+    padding: 0 20px;
+}
+#level3:before { /* Garis Horizontal Kasi & Kaur */
+    content: '';
+    position: absolute;
+    top: -20px; /* Posisi di atas node */
+    left: 5%; /* Mulai dari node paling kiri */
+    right: 5%; /* Sampai node paling kanan */
+    height: 2px;
+    background: var(--color-primary);
+    z-index: 5;
+}
+#level3:after { /* Garis Vertikal dari garis horizontal Level 3 ke Sekdes */
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    width: 2px;
+    height: 30px;
+    background: var(--color-primary);
+    z-index: 5;
+}
+#level3 .node:before { /* Garis Vertikal dari garis horizontal ke setiap node */
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    width: 2px;
+    height: 30px;
+    background: var(--color-primary);
+    z-index: 5;
+}
+
+/* Level 4: Kadus */
+#level4 {
+    margin-top: 50px; 
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 0 20px;
+}
+#level4:before { /* Garis Horizontal Kadus */
+    content: '';
+    position: absolute;
+    top: -20px; 
+    left: 5%; 
+    right: 5%; 
+    height: 2px;
+    background: var(--color-primary);
+    z-index: 5;
+}
+#level4:after { /* Garis Vertikal dari garis horizontal Level 4 ke tengah */
+    content: '';
+    position: absolute;
+    top: -50px;
+    left: 50%; /* Sesuaikan dengan titik pusat komando (sekdes) */
+    width: 2px;
+    height: 30px;
+    background: var(--color-primary);
+    z-index: 5;
+}
+#level4 .node:before { /* Garis Vertikal dari garis horizontal ke setiap node */
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    width: 2px;
+    height: 30px;
+    background: var(--color-primary);
+    z-index: 5;
+}
+
+/* Responsif untuk layar kecil */
 @media (max-width: 768px) {
-    .level { flex-direction: column; gap: 20px; margin: 30px 0; }
-    .node { width: 85%; }
+    #level3, #level4 {
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
+        margin-top: 30px;
+    }
+    .node {
+        width: 80%;
+        margin: 20px 0 0 0;
+    }
+    /* Matikan garis horizontal di mobile, pakai garis vertikal saja */
+    #level3:before, #level3:after, #level4:before, #level4:after {
+        content: none;
+    }
+    /* Garis vertikal di mobile: dari Sekdes ke Kasi/Kaur pertama */
+    #sekdes:after {
+        height: 30px;
+        left: 50%;
+    }
+    /* Garis vertikal antar node di Level 3 dan Level 4 */
+    #level3 .node:after, #level4 .node:after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        width: 2px;
+        height: 20px;
+        background: var(--color-primary);
+    }
+    /* Hapus garis vertikal setelah node terakhir di setiap level */
+    #level3 .node:last-child:after, #level4 .node:last-child:after {
+        content: none;
+    }
+    /* Sambungkan level 3 terakhir ke level 4 pertama */
+    #kaur-perencanaan:after {
+        height: 50px; /* Jarak lebih jauh ke Kadus pertama */
+    }
 }
