@@ -3,87 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Diagram Penduduk Berdasarkan Dukuh (Jenis Kelamin) - Data Terbaru</title>
+    <title>Data Statistik Penduduk Desa Amongrogo</title>
+    <link rel="stylesheet" href="web desa.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    
     <style>
+        /* CSS umum (Pastikan tidak bertabrakan dengan web desa.css Anda) */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 20px;
-            background-color: #f4f7f6;
-            color: #333;
+            /* Hapus margin agar header menempel sempurna jika styling di web desa.css sudah diatur */
+            margin: 0; 
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7f6; /* Warna latar belakang halaman */
         }
-        h1 {
+
+        /* Kontainer Utama untuk konten di bawah header */
+        .page-content {
+            padding: 40px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 80vh; /* Agar footer berada di bawah */
+        }
+        
+        /* Judul Halaman */
+        h1.content-title {
             text-align: center;
-            color: #007bff;
+            color: #17a2b8; /* Warna yang menyegarkan */
             margin-bottom: 30px;
+            font-weight: 700;
         }
-        .container {
+
+        /* --- Styling Diagram --- */
+        .diagram-container {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
             justify-content: center;
-            padding: 10px;
+            margin-top: 20px;
         }
         .chart-box {
             background-color: white;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
             width: 100%;
             max-width: 350px;
-            transition: transform 0.3s ease-in-out;
+            transition: transform 0.2s;
         }
         .chart-box:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
         }
         .chart-title {
             text-align: center;
-            font-size: 1.1em;
+            font-size: 1em;
             margin-bottom: 15px;
-            font-weight: bold;
-            color: #555;
+            font-weight: 600;
+            color: #333;
         }
+        .jumlah-jiwa {
+            text-align: center; 
+            margin-top: 10px; 
+            font-weight: 600;
+            color: #007bff;
+            font-size: 0.9em;
+        }
+        
+        /* --- Styling Rekapitulasi Total --- */
         .total-rekap {
             background-color: #28a745;
             color: white;
-            padding: 25px;
-            border-radius: 10px;
+            padding: 20px;
+            border-radius: 8px;
             text-align: center;
             margin-bottom: 30px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-            width: 90%;
-            max-width: 800px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 95%;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
         }
         .total-rekap h2 {
             margin-top: 0;
-            font-size: 1.5em;
+            font-size: 1.4em;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            padding-bottom: 10px;
+            margin-bottom: 10px;
         }
         .total-rekap p {
-            font-size: 1.2em;
+            font-size: 1.1em;
             margin: 5px 0;
         }
-        /* Style untuk menampilkan jumlah jiwa di bawah diagram */
-        .jumlah-jiwa {
-            text-align: center; 
-            margin-top: 10px; 
-            font-weight: bold;
-            color: #007bff; /* Memberi warna berbeda agar menonjol */
+
+        /* --- Styling Footer (Minimal) --- */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 30px;
+            font-size: 0.9em;
         }
+
+        /* --- Tambahan untuk Diagram Total (Lebih Besar) --- */
+        .chart-box.total-chart {
+            max-width: 400px;
+            margin-bottom: 20px;
+        }
+
         /* Responsiveness */
-        @media (min-width: 768px) {
-            .container {
-                justify-content: space-around;
+        @media (max-width: 768px) {
+            .page-content {
+                padding: 20px 10px;
+            }
+            .total-rekap {
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
-    
 
-    <h1>📊 Data Penduduk Berdasarkan Dukuh (Jenis Kelamin) - Data Terbaru</h1>
+<header id="main-header">
+    <div class="container nav-content">
+        <div class="logo">
+            <img src="assets/logo pemerintahan kabupaten batang.png" alt="logo">
+            <h1>Desa Amongrogo</h1>
+        </div>
+        <nav class="main-nav">
+            <ul>
+                <li><a href="index.html">Beranda</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" id="dropdown-profil">Profil Desa <i class="fas fa-caret-down"></i></a>
+                    <ul class="dropdown-menu" id="menu-profil">
+                        <li><a href="perangkat desa.html"><i class="fas fa-users"></i> Perangkat Desa</a></li>
+                        <li><a href="sejarah desa.html"><i class="fas fa-book-open"></i> Sejarah Desa</a></li>
+                        <li><a href="visi misi desa.html"><i class="fas fa-bullseye"></i> Visi & Misi Desa</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Data Statistik</a></li> <li><a href="#">Kontak</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+<main class="page-content">
+    <h1 class="content-title">📊 Statistik Penduduk Berdasarkan Dukuh (Jenis Kelamin)</h1>
 
     <div class="total-rekap">
         <h2>Rekapitulasi Total Keseluruhan Desa</h2>
@@ -92,8 +160,8 @@
         <p><strong>TOTAL PENDUDUK:</strong> 2908 jiwa</p>
     </div>
     
-    <div class="container">
-        <div class="chart-box" style="max-width: 400px;">
+    <div class="diagram-container">
+        <div class="chart-box total-chart">
             <div class="chart-title">Persentase Total Penduduk Desa</div>
             <canvas id="chartTotal"></canvas>
             <div id="jumlahTotal" class="jumlah-jiwa"></div>
@@ -135,118 +203,129 @@
             <div id="jumlahRW7" class="jumlah-jiwa"></div>
         </div>
     </div>
+</main>
 
-    <script>
-        // Data Penduduk (Diperbarui berdasarkan file terbaru)
-        const dataPenduduk = [
-            { rw: 'RW 1', nama: 'Dukuh Padenokan', laki: 149, perempuan: 122, total: 271 },
-            { rw: 'RW 2', nama: 'Dukuh Amongrogo', laki: 381, perempuan: 421, total: 802 },
-            { rw: 'RW 3', nama: 'Dukuh Maliyan', laki: 143, perempuan: 163, total: 306 },
-            { rw: 'RW 4', nama: 'Dukuh Manggisan', laki: 211, perempuan: 195, total: 406 }, 
-            { rw: 'RW 5', nama: 'Dukuh Kwangsan', laki: 191, perempuan: 184, total: 375 },
-            { rw: 'RW 6', nama: 'Dukuh Sindutan', laki: 179, perempuan: 175, total: 354 },
-            { rw: 'RW 7', nama: 'Dukuh Sokosawit', laki: 197, perempuan: 197, total: 394 },
-        ];
+<footer>
+    &copy; 2024 Desa Amongrogo. Hak Cipta Dilindungi.
+</footer>
 
-        // Total yang telah dihitung ulang
-        const totalLaki = 1451; 
-        const totalPerempuan = 1457;
-        const totalPenduduk = totalLaki + totalPerempuan; // 2908
+<script>
+    // --- Data Penduduk Terbaru ---
+    const dataPenduduk = [
+        { rw: 'RW 1', nama: 'Dukuh Padenokan', laki: 149, perempuan: 122, total: 271 },
+        { rw: 'RW 2', nama: 'Dukuh Amongrogo', laki: 381, perempuan: 421, total: 802 },
+        { rw: 'RW 3', nama: 'Dukuh Maliyan', laki: 143, perempuan: 163, total: 306 },
+        { rw: 'RW 4', nama: 'Dukuh Manggisan', laki: 211, perempuan: 195, total: 406 }, 
+        { rw: 'RW 5', nama: 'Dukuh Kwangsan', laki: 191, perempuan: 184, total: 375 },
+        { rw: 'RW 6', nama: 'Dukuh Sindutan', laki: 179, perempuan: 175, total: 354 },
+        { rw: 'RW 7', nama: 'Dukuh Sokosawit', laki: 197, perempuan: 197, total: 394 },
+    ];
 
-        // Konfigurasi umum untuk semua diagram lingkaran
-        const pieConfig = (dataLaki, dataPerempuan, elementId) => {
-            const ctx = document.getElementById(elementId).getContext('2d');
-            
-            const total = dataLaki + dataPerempuan;
+    const totalLaki = 1451; 
+    const totalPerempuan = 1457;
+    const totalPenduduk = totalLaki + totalPerempuan; 
 
-            // Tampilkan Jumlah Jiwa di bawah diagram
-            document.getElementById(`jumlah${elementId.slice(5)}`).innerHTML = 
-                `Laki-Laki: ${dataLaki} jiwa | Perempuan: ${dataPerempuan} jiwa | Total: ${total} jiwa`;
+    // --- Fungsi Konfigurasi Diagram (Sama seperti sebelumnya) ---
+    const pieConfig = (dataLaki, dataPerempuan, elementId) => {
+        const ctx = document.getElementById(elementId).getContext('2d');
+        const total = dataLaki + dataPerempuan;
 
-            return new Chart(ctx, {
-                plugins: [ChartDataLabels],
-                type: 'pie',
-                data: {
-                    labels: ['Laki-Laki', 'Perempuan'],
-                    datasets: [{
-                        data: [dataLaki, dataPerempuan],
-                        backgroundColor: [
-                            '#007bff', // Biru untuk Laki-Laki
-                            '#ff69b4'  // Pink untuk Perempuan
-                        ],
-                        hoverOffset: 15,
-                        borderWidth: 2,
-                        borderColor: '#ffffff'
-                    }]
+        // Tampilkan Jumlah Jiwa di bawah diagram
+        document.getElementById(`jumlah${elementId.slice(5)}`).innerHTML = 
+            `Laki-Laki: ${dataLaki} | Perempuan: ${dataPerempuan} | Total: ${total} jiwa`;
+
+        return new Chart(ctx, {
+            plugins: [ChartDataLabels],
+            type: 'pie',
+            data: {
+                labels: ['Laki-Laki', 'Perempuan'],
+                datasets: [{
+                    data: [dataLaki, dataPerempuan],
+                    backgroundColor: [
+                        '#007bff', // Biru
+                        '#ff69b4'  // Pink
+                    ],
+                    hoverOffset: 15,
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                animation: {
+                    animateRotate: true,
+                    animateScale: true 
                 },
-                options: {
-                    responsive: true,
-                    animation: {
-                        animateRotate: true,
-                        animateScale: true 
+                plugins: {
+                    legend: {
+                        position: 'top',
+                        labels: {
+                            font: { size: 12 }
+                        }
                     },
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                            labels: {
-                                font: {
-                                    size: 14
-                                }
-                            }
+                    datalabels: {
+                        formatter: (value, context) => {
+                            const totalDataset = context.dataset.data.reduce((a, b) => a + b, 0);
+                            const percentage = (value / totalDataset * 100).toFixed(1) + '%';
+                            return percentage;
                         },
-                        // Konfigurasi Datalabels (Persentase di dalam)
-                        datalabels: {
-                            formatter: (value, context) => {
+                        color: 'white',
+                        font: { weight: 'bold', size: 14 },
+                        anchor: 'center', // Ubah ke 'center' agar lebih mudah dilihat
+                        align: 'center',
+                        padding: 0
+                    },
+                    tooltip: {
+                         callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                const value = context.parsed;
                                 const totalDataset = context.dataset.data.reduce((a, b) => a + b, 0);
-                                const percentage = (value / totalDataset * 100).toFixed(1) + '%';
-                                return percentage;
-                            },
-                            color: 'white',
-                            font: {
-                                weight: 'bold',
-                                size: 14
-                            },
-                            anchor: 'end',
-                            align: 'start',
-                            offset: 4,
-                            padding: 0
-                        },
-                        tooltip: {
-                             callbacks: {
-                                label: function(context) {
-                                    let label = context.label || '';
-                                    if (label) {
-                                        label += ': ';
-                                    }
-                                    const value = context.parsed;
-                                    const totalDataset = context.dataset.data.reduce((a, b) => a + b, 0);
-                                    const percentage = ((value / totalDataset) * 100).toFixed(1);
-                                    return `${label}${value} jiwa (${percentage}%)`;
-                                }
+                                const percentage = ((value / totalDataset) * 100).toFixed(1);
+                                return `${label}${value} jiwa (${percentage}%)`;
                             }
                         }
                     }
                 }
+            }
+        });
+    };
+
+    // --- Inisialisasi Diagram ---
+    pieConfig(totalLaki, totalPerempuan, 'chartTotal');
+    pieConfig(dataPenduduk[0].laki, dataPenduduk[0].perempuan, 'chartRW1');
+    pieConfig(dataPenduduk[1].laki, dataPenduduk[1].perempuan, 'chartRW2');
+    pieConfig(dataPenduduk[2].laki, dataPenduduk[2].perempuan, 'chartRW3');
+    pieConfig(dataPenduduk[3].laki, dataPenduduk[3].perempuan, 'chartRW4');
+    pieConfig(dataPenduduk[4].laki, dataPenduduk[4].perempuan, 'chartRW5');
+    pieConfig(dataPenduduk[5].laki, dataPenduduk[5].perempuan, 'chartRW6');
+    pieConfig(dataPenduduk[6].laki, dataPenduduk[6].perempuan, 'chartRW7');
+
+    // --- JavaScript untuk Fungsionalitas Dropdown Header ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const dropdownToggle = document.getElementById('dropdown-profil');
+        const dropdownMenu = document.getElementById('menu-profil');
+
+        if (dropdownToggle && dropdownMenu) {
+            dropdownToggle.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Toggle kelas 'show' untuk menampilkan/menyembunyikan menu
+                dropdownMenu.classList.toggle('show');
             });
-        };
 
-        // --- 1. Diagram Rekapitulasi Total ---
-        pieConfig(totalLaki, totalPerempuan, 'chartTotal');
-        
-        // --- 2. Diagram Per RW/Dukuh ---
-        pieConfig(dataPenduduk[0].laki, dataPenduduk[0].perempuan, 'chartRW1');
-        pieConfig(dataPenduduk[1].laki, dataPenduduk[1].perempuan, 'chartRW2');
-        pieConfig(dataPenduduk[2].laki, dataPenduduk[2].perempuan, 'chartRW3');
-        pieConfig(dataPenduduk[3].laki, dataPenduduk[3].perempuan, 'chartRW4');
-        pieConfig(dataPenduduk[4].laki, dataPenduduk[4].perempuan, 'chartRW5');
-        pieConfig(dataPenduduk[5].laki, dataPenduduk[5].perempuan, 'chartRW6');
-        pieConfig(dataPenduduk[6].laki, dataPenduduk[6].perempuan, 'chartRW7');
-    </script>
-  
-<script src="script.js"></script>
+            // Sembunyikan menu saat mengklik di luar
+            document.addEventListener('click', (e) => {
+                if (!dropdownToggle.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                    dropdownMenu.classList.remove('show');
+                }
+            });
+        }
+    });
+
+</script>
+
 </body>
-
 </html>
-
-
-
