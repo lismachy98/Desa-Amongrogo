@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagram Penduduk Berdasarkan Dukuh (Jenis Kelamin) - Data Terbaru</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 30px;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            padding: 10px;
+        }
+        .chart-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 350px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .chart-box:hover {
+            transform: translateY(-5px);
+        }
+        .chart-title {
+            text-align: center;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: #555;
+        }
+        .total-rekap {
+            background-color: #28a745;
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            width: 90%;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .total-rekap h2 {
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+        .total-rekap p {
+            font-size: 1.2em;
+            margin: 5px 0;
+        }
+        /* Style untuk menampilkan jumlah jiwa di bawah diagram */
+        .jumlah-jiwa {
+            text-align: center; 
+            margin-top: 10px; 
+            font-weight: bold;
+            color: #007bff; /* Memberi warna berbeda agar menonjol */
+        }
+        /* Responsiveness */
+        @media (min-width: 768px) {
+            .container {
+                justify-content: space-around;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>📊 Data Penduduk Berdasarkan Dukuh (Jenis Kelamin) - Data Terbaru</h1>
+
+    <div class="total-rekap">
+        <h2>Rekapitulasi Total Keseluruhan Desa</h2>
+        <p><strong>Total Laki-Laki:</strong> 1451 jiwa</p>
+        <p><strong>Total Perempuan:</strong> 1457 jiwa</p>
+        <p><strong>TOTAL PENDUDUK:</strong> 2908 jiwa</p>
+    </div>
+    
+    <div class="container">
+        <div class="chart-box" style="max-width: 400px;">
+            <div class="chart-title">Persentase Total Penduduk Desa</div>
+            <canvas id="chartTotal"></canvas>
+            <div id="jumlahTotal" class="jumlah-jiwa"></div>
+        </div>
+        
+        <div class="chart-box">
+            <div class="chart-title">Dukuh Padenokan (RW 1)</div>
+            <canvas id="chartRW1"></canvas>
+            <div id="jumlahRW1" class="jumlah-jiwa"></div>
+        </div>
+        <div class="chart-box">
+            <div class="chart-title">Dukuh Amongrogo (RW 2)</div>
+            <canvas id="chartRW2"></canvas>
+            <div id="jumlahRW2" class="jumlah-jiwa"></div>
+        </div>
+        <div class="chart-box">
+            <div class="chart-title">Dukuh Maliyan (RW 3)</div>
+            <canvas id="chartRW3"></canvas>
+            <div id="jumlahRW3" class="jumlah-jiwa"></div>
+        </div>
+        <div class="chart-box">
+            <div class="chart-title">Dukuh Manggisan (RW 4)</div>
+            <canvas id="chartRW4"></canvas>
+            <div id="jumlahRW4" class="jumlah-jiwa"></div>
+        </div>
+        <div class="chart-box">
+            <div class="chart-title">Dukuh Kwangsan (RW 5)</div>
+            <canvas id="chartRW5"></canvas>
+            <div id="jumlahRW5" class="jumlah-jiwa"></div>
+        </div>
+        <div class="chart-box">
+            <div class="chart-title">Dukuh Sindutan (RW 6)</div>
+            <canvas id="chartRW6"></canvas>
+            <div id="jumlahRW6" class="jumlah-jiwa"></div>
+        </div>
+        <div class="chart-box">
+            <div class="chart-title">Dukuh Sokosawit (RW 7)</div>
+            <canvas id="chartRW7"></canvas>
+            <div id="jumlahRW7" class="jumlah-jiwa"></div>
+        </div>
+    </div>
+
+    <script>
+        // Data Penduduk (Diperbarui berdasarkan file terbaru)
+        const dataPenduduk = [
+            { rw: 'RW 1', nama: 'Dukuh Padenokan', laki: 149, perempuan: 122, total: 271 },
+            { rw: 'RW 2', nama: 'Dukuh Amongrogo', laki: 381, perempuan: 421, total: 802 },
+            { rw: 'RW 3', nama: 'Dukuh Maliyan', laki: 143, perempuan: 163, total: 306 },
+            { rw: 'RW 4', nama: 'Dukuh Manggisan', laki: 211, perempuan: 195, total: 406 }, 
+            { rw: 'RW 5', nama: 'Dukuh Kwangsan', laki: 191, perempuan: 184, total: 375 },
+            { rw: 'RW 6', nama: 'Dukuh Sindutan', laki: 179, perempuan: 175, total: 354 },
+            { rw: 'RW 7', nama: 'Dukuh Sokosawit', laki: 197, perempuan: 197, total: 394 },
+        ];
+
+        // Total yang telah dihitung ulang
+        const totalLaki = 1451; 
+        const totalPerempuan = 1457;
+        const totalPenduduk = totalLaki + totalPerempuan; // 2908
+
+        // Konfigurasi umum untuk semua diagram lingkaran
+        const pieConfig = (dataLaki, dataPerempuan, elementId) => {
+            const ctx = document.getElementById(elementId).getContext('2d');
+            
+            const total = dataLaki + dataPerempuan;
+
+            // Tampilkan Jumlah Jiwa di bawah diagram
+            document.getElementById(`jumlah${elementId.slice(5)}`).innerHTML = 
+                `Laki-Laki: ${dataLaki} jiwa | Perempuan: ${dataPerempuan} jiwa | Total: ${total} jiwa`;
+
+            return new Chart(ctx, {
+                plugins: [ChartDataLabels],
+                type: 'pie',
+                data: {
+                    labels: ['Laki-Laki', 'Perempuan'],
+                    datasets: [{
+                        data: [dataLaki, dataPerempuan],
+                        backgroundColor: [
+                            '#007bff', // Biru untuk Laki-Laki
+                            '#ff69b4'  // Pink untuk Perempuan
+                        ],
+                        hoverOffset: 15,
+                        borderWidth: 2,
+                        borderColor: '#ffffff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    animation: {
+                        animateRotate: true,
+                        animateScale: true 
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    size: 14
+                                }
+                            }
+                        },
+                        // Konfigurasi Datalabels (Persentase di dalam)
+                        datalabels: {
+                            formatter: (value, context) => {
+                                const totalDataset = context.dataset.data.reduce((a, b) => a + b, 0);
+                                const percentage = (value / totalDataset * 100).toFixed(1) + '%';
+                                return percentage;
+                            },
+                            color: 'white',
+                            font: {
+                                weight: 'bold',
+                                size: 14
+                            },
+                            anchor: 'end',
+                            align: 'start',
+                            offset: 4,
+                            padding: 0
+                        },
+                        tooltip: {
+                             callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    const value = context.parsed;
+                                    const totalDataset = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((value / totalDataset) * 100).toFixed(1);
+                                    return `${label}${value} jiwa (${percentage}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        };
+
+        // --- 1. Diagram Rekapitulasi Total ---
+        pieConfig(totalLaki, totalPerempuan, 'chartTotal');
+        
+        // --- 2. Diagram Per RW/Dukuh ---
+        pieConfig(dataPenduduk[0].laki, dataPenduduk[0].perempuan, 'chartRW1');
+        pieConfig(dataPenduduk[1].laki, dataPenduduk[1].perempuan, 'chartRW2');
+        pieConfig(dataPenduduk[2].laki, dataPenduduk[2].perempuan, 'chartRW3');
+        pieConfig(dataPenduduk[3].laki, dataPenduduk[3].perempuan, 'chartRW4');
+        pieConfig(dataPenduduk[4].laki, dataPenduduk[4].perempuan, 'chartRW5');
+        pieConfig(dataPenduduk[5].laki, dataPenduduk[5].perempuan, 'chartRW6');
+        pieConfig(dataPenduduk[6].laki, dataPenduduk[6].perempuan, 'chartRW7');
+    </script>
+
+</body>
+</html>
