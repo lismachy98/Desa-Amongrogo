@@ -7,42 +7,17 @@
     <link rel="stylesheet" href="web desa.css"> 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    /* CSS dari respons sebelumnya yang sudah dipindahkan ke web desa.css seharusnya sudah memadai */
-  </style>
 </head>
 
 <body>
 
 <header id="main-header">
-    <div class="container nav-content">
-    <div class="logo">
-      <img src="assets/logo pemerintahan kabupaten batang.png" alt="logo">
-      <h1>Desa Amongrogo</h1>
-    </div>
-    <nav class="main-nav">
-      <ul>
-        <li><a href="index.html">Beranda</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle">Profil Desa <i class="fas fa-caret-down"></i></a>
-          <ul class="dropdown-menu">
-            <li><a href="perangkat desa.html"><i class="fas fa-users"></i> Perangkat Desa</a></li>
-            <li><a href="sejarah desa.html"><i class="fas fa-book-open"></i> Sejarah Desa</a></li>
-            <li><a href="visi misi desa.html"><i class="fas fa-bullseye"></i> Visi & Misi Desa</a></li>
-          </ul>
-        </li>
-        <li><a href="diagram rekapitulasi warga.html">Data Statistik</a></li>
-        <li><a href="#">Kontak</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+  </header>
 
 <main>
   <h2>Struktur Organisasi Pemerintah Desa Amongrogo</h2>
 
-  <div class="org-chart" id="orgChart">
-    <canvas id="connector"></canvas>
+    <div class="org-chart" id="orgChart">
 
         <div class="level" id="level1">
       <div class="node" id="kepala">
@@ -73,141 +48,15 @@
       <div class="node" id="kadus-manggisan"><h3>PRI HARSOYO</h3><p>Kadus Manggisan</p></div>
       <div class="node" id="kadus-sindutan"><h3>SU’UT, S.Ag.</h3><p>Kadus Sindutan</p></div>
       <div class="node" id="kadus-sokosawit"><h3>A. NAFIS, SE</h3><p>Kadus Sokosawit</p></div>
-      <div class="node" id="kadus-maliyani"><h3>RUSLINAWATI</h3><p>Kadus Maliyan</p></div>
+      <div class="node" id="kadus-maliyani"><h3>RUSLINAWATI</h3><p>Kadus Maliyani</p></div>
       <div class="node" id="kadus-kwangsan"><h3>SETYO EDI WIBOWO</h3><p>Kadus Kwangsan</p></div>
     </div>
   </div>
 </main>
-
-<script>
-// Fungsi yang sekarang berjalan setelah DOM dipastikan dimuat
-document.addEventListener('DOMContentLoaded', function() {
-    
-    function drawConnections() {
-        const canvas = document.getElementById('connector');
-        const orgChart = document.getElementById('orgChart');
-        
-        // Jika elemen tidak ditemukan, hentikan fungsi
-        if (!canvas || !orgChart) return;
-
-        const ctx = canvas.getContext('2d');
-        const rect = orgChart.getBoundingClientRect();
-
-        // Mengatur ukuran canvas agar sama dengan container org-chart
-        canvas.style.width = rect.width + 'px';
-        canvas.style.height = rect.height + 'px';
-        canvas.width = rect.width;
-        canvas.height = rect.height;
-        
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.strokeStyle = '#1a6f8b';
-        ctx.lineWidth = 2;
-
-        // Fungsi pembantu untuk mendapatkan posisi pusat node relatif terhadap orgChart
-        const getCenter = (el) => {
-            const r = el.getBoundingClientRect();
-            // Posisi relatif terhadap orgChart container
-            return {
-                x: r.left + r.width / 2 - rect.left,
-                top: r.top - rect.top,
-                bottom: r.bottom - rect.top
-            };
-        };
-
-        const kepala = document.getElementById('kepala');
-        const sekdes = document.getElementById('sekdes');
-        const level3 = Array.from(document.querySelectorAll('#level3 .node'));
-        const level4 = Array.from(document.querySelectorAll('#level4 .node'));
-
-        // Pastikan node kunci ada sebelum melanjutkan
-        if (!kepala || !sekdes || level3.length === 0 || level4.length === 0) return;
-
-        const cKepala = getCenter(kepala);
-        const cSekdes = getCenter(sekdes);
-
-        // 1. Kepala (Level 1) → Sekdes (Level 2)
-        ctx.beginPath();
-        ctx.moveTo(cKepala.x, cKepala.bottom);
-        ctx.lineTo(cSekdes.x, cSekdes.top);
-        ctx.stroke();
-
-        
-        // 2. Sekdes (Level 2) → Kasi & Kaur (Level 3)
-        const cLevel3 = level3.map(getCenter);
-        const firstL3 = cLevel3[0];
-        const lastL3 = cLevel3[cLevel3.length - 1];
-        const horizontalL3Y = firstL3.top - 30; // Garis horizontal Level 3
-        const middleL3X = cSekdes.x; // Titik tengah komando vertikal
-
-        // Garis Vertikal Sekdes ke Garis Horizontal Level 3
-        ctx.beginPath();
-        ctx.moveTo(middleL3X, cSekdes.bottom);
-        ctx.lineTo(middleL3X, horizontalL3Y);
-        ctx.stroke();
-
-        // Garis Horizontal Level 3 (Menghubungkan semua Kasi/Kaur)
-        ctx.beginPath();
-        ctx.moveTo(firstL3.x, horizontalL3Y);
-        ctx.lineTo(lastL3.x, horizontalL3Y);
-        ctx.stroke();
-
-        // Garis Vertikal dari Garis Horizontal ke setiap Node Level 3
-        cLevel3.forEach(cNode => {
-            ctx.beginPath();
-            ctx.moveTo(cNode.x, horizontalL3Y);
-            ctx.lineTo(cNode.x, cNode.top);
-            ctx.stroke();
-        });
-
-        
-        // 3. Level 3 → Kadus (Level 4)
-        const cLevel4 = level4.map(getCenter);
-        const firstL4 = cLevel4[0];
-        const lastL4 = cLevel4[cLevel4.length - 1];
-        const horizontalL4Y = firstL4.top - 30; // Garis horizontal Level 4
-        
-        // Titik komando vertikal dari Level 3 ke Level 4
-        const L3BottomY = level3[0].getBoundingClientRect().bottom - rect.top;
-        const commonL3X = middleL3X; // Tetap gunakan pusat Sekdes/pusat Level 3 sebagai titik komando
-
-        // Garis Vertikal dari bawah Level 3 ke Garis Horizontal Level 4
-        ctx.beginPath();
-        ctx.moveTo(commonL3X, L3BottomY + 15);
-        ctx.lineTo(commonL3X, horizontalL4Y);
-        ctx.stroke();
-        
-        // Garis Horizontal Level 4 (Menghubungkan semua Kadus, termasuk Sindutan ke Kwangsan)
-        ctx.beginPath();
-        ctx.moveTo(firstL4.x, horizontalL4Y);
-        ctx.lineTo(lastL4.x, horizontalL4Y);
-        // Sambungkan garis tengah komando ke garis horizontal ini (jika tidak sudah terhubung)
-        if (commonL3X < firstL4.x || commonL3X > lastL4.x) {
-          ctx.moveTo(commonL3X, horizontalL4Y);
-          ctx.lineTo(commonL3X < firstL4.x ? firstL4.x : lastL4.x, horizontalL4Y);
-        }
-        ctx.stroke();
-
-        // Garis Vertikal dari Garis Horizontal ke setiap Node Level 4 (Kadus)
-        cLevel4.forEach(cNode => {
-            ctx.beginPath();
-            ctx.moveTo(cNode.x, horizontalL4Y);
-            ctx.lineTo(cNode.x, cNode.top);
-            ctx.stroke();
-        });
-    }
-
-    // Jalankan fungsi saat DOM dimuat
-    drawConnections(); 
-    
-    // Jalankan lagi saat jendela diubah ukurannya
-    window.addEventListener('resize', drawConnections);
-});
-</script>
 
 <footer class="text-center" style="padding:20px 0; background:#f8f9fa; margin-top:40px;">
   <p>&copy; 2025 Pemerintah Desa Amongrogo</p>
 </footer>
   
 </body>
-
 </html>
