@@ -243,35 +243,57 @@ ul {
     text-align: center;
 }
 
-/* Info Grid (Quick Links) */
+/* ====== STYLE INFO GRID & CARD ====== */
 .info-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 20px;
-    margin-bottom: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
 }
 
 .info-card {
-    background: #ffffff;
-    text-align: center;
-    padding: 25px 15px;
-    background-color: var(--color-light);
-    border: 1px solid #eee;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    border-radius: 8px;
-    transition: transform 0.3s;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  padding: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .info-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-subtle);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+}
+
+/* styling untuk teks dalam card */
+.info-card h3 {
+  margin-top: 15px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.info-card p {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 5px;
+}
+
+/* styling untuk gambar */
+.info-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 10px;
 }
 
 .icon-xl {
-    font-size: 40px;
-    color: var(--color-primary);
-    margin-bottom: 10px;
+  font-size: 40px;
+  color: var(--color-primary);
+  margin-bottom: 10px;
 }
+
 
 /* Sambutan Kepala Desa */
 .head-profile {
