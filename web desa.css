@@ -281,11 +281,14 @@ ul {
 
 /* styling untuk gambar */
 .info-img {
-  width: 80px;
-  height: 80px;
+  width: 40px;
+  height: 40px;
   object-fit: cover;
   border-radius: 50%;
   margin-bottom: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .icon-xl {
@@ -484,5 +487,6 @@ footer {
     }
 
 }
+
 
 
